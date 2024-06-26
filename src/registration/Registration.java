@@ -11,7 +11,6 @@ package registration;
 
 import javax.swing.JOptionPane;
 import java.util.List;
-import java.util.ArrayList;
 
 public class Registration {
     public static void main(String[] args) {
@@ -45,23 +44,20 @@ public class Registration {
             JOptionPane.showMessageDialog(null, "Welcome to EasyKanban");
 
             // Main menu selection
-            String appFeature = JOptionPane.showInputDialog(null, "Choose option:\n1) Add tasks\n2) View tasks\n3) Show Report\n4) Quit");
+            String appFeature = JOptionPane.showInputDialog(null, "Choose option:\n1) Add tasks\n2) Show Report\n3) Quit");
 
-            while (!appFeature.equals("4")) {
+            while (!appFeature.equals("3")) {
                 switch (appFeature) {
                     case "1":
                         addTasks();
                         break;
                     case "2":
-                        viewTasks();
-                        break;
-                    case "3":
                         showReport();
                         break;
                     default:
                         JOptionPane.showMessageDialog(null, "Invalid option. Please try again.");
                 }
-                appFeature = JOptionPane.showInputDialog(null, "Choose option:\n1) Add tasks\n2) View tasks\n3) Show Report\n4) Quit");
+                appFeature = JOptionPane.showInputDialog(null, "Choose option:\n1) Add tasks\n2) Show Report\n3) Quit");
             }
             JOptionPane.showMessageDialog(null, "Exiting EasyKanban. Goodbye!");
         }
@@ -99,20 +95,6 @@ public class Registration {
         JOptionPane.showMessageDialog(null, "Tasks added successfully.");
     }
 
-    // Method to view tasks
-    private static void viewTasks() {
-        List<Task> allTasks = Task.getAllTasks();
-        if (allTasks.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "No tasks available. Coming Soon.");
-        } else {
-            StringBuilder taskDetails = new StringBuilder();
-            for (Task task : allTasks) {
-                taskDetails.append(task.printTaskDetails()).append("\n\n");
-            }
-            JOptionPane.showMessageDialog(null, taskDetails.toString());
-        }
-    }
-
     // Method to show report options
     private static void showReport() {
         List<Task> allTasks = Task.getAllTasks();
@@ -121,10 +103,13 @@ public class Registration {
             return;
         }
 
-        String[] reportOptions = {"Delete task using Task Name", "Search Array for task assigned to developer", "Display details for task with longest duration"};
+        String[] reportOptions = {"View tasks", "Delete task using Task Name", "Search Array for task assigned to developer", "Display details for task with longest duration", "Display all tasks that are 'done'", "Search task by name"};
         String reportChoice = (String) JOptionPane.showInputDialog(null, "Select report option:", "Show Report", JOptionPane.QUESTION_MESSAGE, null, reportOptions, reportOptions[0]);
         if (reportChoice != null) {
             switch (reportChoice) {
+                case "View tasks":
+                    viewTasks();
+                    break;
                 case "Delete task using Task Name":
                     String taskNameToDelete = JOptionPane.showInputDialog(null, "Enter the name of the task to delete:");
                     deleteTaskByName(taskNameToDelete);
@@ -136,9 +121,30 @@ public class Registration {
                 case "Display details for task with longest duration":
                     displayTaskWithLongestDuration();
                     break;
+                case "Display all tasks that are 'done'":
+                    displayAllDoneTasks();
+                    break;
+                case "Search task by name":
+                    String taskName = JOptionPane.showInputDialog(null, "Enter the task name to search for:");
+                    searchTaskByName(taskName);
+                    break;
                 default:
                     JOptionPane.showMessageDialog(null, "Invalid report option.");
             }
+        }
+    }
+
+    // Method to view tasks
+    private static void viewTasks() {
+        List<Task> allTasks = Task.getAllTasks();
+        if (allTasks.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "No tasks available.");
+        } else {
+            StringBuilder taskDetails = new StringBuilder();
+            for (Task task : allTasks) {
+                taskDetails.append(task.printTaskDetails()).append("\n\n");
+            }
+            JOptionPane.showMessageDialog(null, taskDetails.toString());
         }
     }
 
@@ -194,5 +200,40 @@ public class Registration {
         }
 
         JOptionPane.showMessageDialog(null, "Task with the longest duration:\n\n" + longestDurationTask.printTaskDetails());
+    }
+
+    // Method to display all tasks that are 'done'
+    private static void displayAllDoneTasks() {
+        List<Task> allTasks = Task.getAllTasks();
+        StringBuilder doneTasks = new StringBuilder();
+        boolean tasksFoundFlag = false;
+        for (Task task : allTasks) {
+            if (task.getTaskStatus().equalsIgnoreCase("Done")) {
+                doneTasks.append(task.printTaskDetails()).append("\n\n");
+                tasksFoundFlag = true;
+            }
+        }
+        if (tasksFoundFlag) {
+            JOptionPane.showMessageDialog(null, "Tasks that are 'done':\n\n" + doneTasks.toString());
+        } else {
+            JOptionPane.showMessageDialog(null, "No tasks found that are 'done'.");
+        }
+    }
+
+    // Method to search for a task by its name
+    private static void searchTaskByName(String taskName) {
+        List<Task> allTasks = Task.getAllTasks();
+        Task taskFound = null;
+        for (Task task : allTasks) {
+            if (task.getTaskName().equalsIgnoreCase(taskName)) {
+                taskFound = task;
+                break;
+            }
+        }
+        if (taskFound != null) {
+            JOptionPane.showMessageDialog(null, "Task found:\n\n" + taskFound.printTaskDetails());
+        } else {
+            JOptionPane.showMessageDialog(null, "Task with name \"" + taskName + "\" not found.");
+        }
     }
 }

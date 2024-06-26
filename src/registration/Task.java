@@ -17,51 +17,54 @@ public class Task {
     private String developerDetails;
     private int taskDuration;
     private String taskStatus;
-    private static List<Task> allTasks = new ArrayList<>();
+    private static List<Task> taskList = new ArrayList<>();
 
+    // Constructor
     public Task(String taskName, String taskDescription, String developerDetails, int taskDuration) {
         this.taskName = taskName;
         this.taskDescription = taskDescription;
         this.developerDetails = developerDetails;
         this.taskDuration = taskDuration;
-        this.taskStatus = "To Do"; // Default status is set to "To Do"
-        allTasks.add(this);
+        taskList.add(this);
     }
 
-    public boolean checkTaskDescription(String description) {
-        return description.length() <= 50;
+    // Getter methods
+    public String getTaskName() {
+        return taskName;
     }
 
-    public String createTaskID() {
-        if (taskName != null && taskName.length() >= 2 && developerDetails != null && developerDetails.length() >= 3) {
-            return taskName.substring(0, 2).toUpperCase() + ":" + allTasks.size() + ":" + developerDetails.substring(0, 3).toUpperCase();
-        } else {
-            return "Invalid task or developer name";
-        }
-    }
-
-    public void setTaskStatus(String status) {
-        this.taskStatus = status;
-    }
-
-    public String printTaskDetails() {
-        String taskId = createTaskID();
-        return "Task Name: " + taskName + "\nTask Description: " + taskDescription + "\nDeveloper: " + developerDetails + "\nTask Duration: " + taskDuration + " hours" + "\nTask Status: " + taskStatus + "\nTask ID: " + taskId;
-    }
-
-    public int getTaskDuration() {
-        return taskDuration;
+    public String getTaskDescription() {
+        return taskDescription;
     }
 
     public String getDeveloperDetails() {
         return developerDetails;
     }
 
-    public String getTaskName() {
-        return taskName;
+    public int getTaskDuration() {
+        return taskDuration;
     }
 
+    public String getTaskStatus() {
+        return taskStatus;
+    }
+
+    // Setter method for task status
+    public void setTaskStatus(String taskStatus) {
+        this.taskStatus = taskStatus;
+    }
+
+    // Static method to get all tasks
     public static List<Task> getAllTasks() {
-        return allTasks;
+        return taskList;
+    }
+
+    // Method to print task details
+    public String printTaskDetails() {
+        return "Task Name: " + taskName + "\n" +
+                "Task Description: " + taskDescription + "\n" +
+                "Developer Details: " + developerDetails + "\n" +
+                "Task Duration: " + taskDuration + " hours\n" +
+                "Task Status: " + taskStatus;
     }
 }
