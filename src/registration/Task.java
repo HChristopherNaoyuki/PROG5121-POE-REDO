@@ -17,6 +17,8 @@ public class Task {
     private String developerDetails;
     private int taskDuration;
     private String taskStatus;
+    private String taskID;
+    private static int taskCount = 0;
     private static List<Task> taskList = new ArrayList<>();
 
     // Constructor
@@ -25,6 +27,8 @@ public class Task {
         this.taskDescription = taskDescription;
         this.developerDetails = developerDetails;
         this.taskDuration = taskDuration;
+        taskCount++;
+        this.taskID = createTaskID();
         taskList.add(this);
     }
 
@@ -49,6 +53,10 @@ public class Task {
         return taskStatus;
     }
 
+    public String getTaskID() {
+        return taskID;
+    }
+
     // Setter method for task status
     public void setTaskStatus(String taskStatus) {
         this.taskStatus = taskStatus;
@@ -59,12 +67,25 @@ public class Task {
         return taskList;
     }
 
+    // Method to create task ID
+    public String createTaskID() {
+        String[] devNameParts = developerDetails.split(" ");
+        String devInitials = devNameParts[0].substring(0, 1) + devNameParts[1].substring(0, 1);
+        return taskName.substring(0, 2).toUpperCase() + ":" + taskCount + ":" + devInitials.toUpperCase();
+    }
+
     // Method to print task details
     public String printTaskDetails() {
         return "Task Name: " + taskName + "\n" +
                 "Task Description: " + taskDescription + "\n" +
                 "Developer Details: " + developerDetails + "\n" +
                 "Task Duration: " + taskDuration + " hours\n" +
-                "Task Status: " + taskStatus;
+                "Task Status: " + taskStatus + "\n" +
+                "Task ID: " + taskID;
+    }
+
+    // Method to check if task description length is valid
+    public boolean checkTaskDescription(String taskDescription) {
+        return taskDescription.length() <= 50;
     }
 }

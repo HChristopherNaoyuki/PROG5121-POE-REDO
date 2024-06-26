@@ -12,6 +12,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class LoginTest {
+
     @Test
     public void testCheckUserName_Valid() {
         Login test = new Login();

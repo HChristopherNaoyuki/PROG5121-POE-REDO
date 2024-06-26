@@ -27,7 +27,7 @@ public class Registration {
         JOptionPane.showMessageDialog(null, registrationMessage);
 
         // Check if registration was successful
-        if (!registrationMessage.contains("successfully")) {
+        if (!registrationMessage.contains("Registration successful")) {
             JOptionPane.showMessageDialog(null, "Registration failed. Exiting program.");
             return;
         }
@@ -103,25 +103,25 @@ public class Registration {
             return;
         }
 
-        String[] reportOptions = {"View tasks", "Delete task using Task Name", "Search Array for task assigned to developer", "Display details for task with longest duration", "Display all tasks that are 'done'", "Search task by name"};
+        String[] reportOptions = {"View all tasks", "Delete task using Task Name", "Search task by developer", "Task with longest duration", "View 'done' tasks", "Search task by name"};
         String reportChoice = (String) JOptionPane.showInputDialog(null, "Select report option:", "Show Report", JOptionPane.QUESTION_MESSAGE, null, reportOptions, reportOptions[0]);
         if (reportChoice != null) {
             switch (reportChoice) {
-                case "View tasks":
+                case "View all tasks":
                     viewTasks();
                     break;
                 case "Delete task using Task Name":
                     String taskNameToDelete = JOptionPane.showInputDialog(null, "Enter the name of the task to delete:");
                     deleteTaskByName(taskNameToDelete);
                     break;
-                case "Search Array for task assigned to developer":
+                case "Search task by developer":
                     String developerName = JOptionPane.showInputDialog(null, "Enter the developer name to search for:");
                     searchTasksByDeveloper(developerName);
                     break;
-                case "Display details for task with longest duration":
+                case "Task with longest duration":
                     displayTaskWithLongestDuration();
                     break;
-                case "Display all tasks that are 'done'":
+                case "View 'done' tasks":
                     displayAllDoneTasks();
                     break;
                 case "Search task by name":
@@ -231,7 +231,7 @@ public class Registration {
             }
         }
         if (taskFound != null) {
-            JOptionPane.showMessageDialog(null, "Task found:\n\n" + taskFound.printTaskDetails());
+            JOptionPane.showMessageDialog(null, "Task details:\n\n" + taskFound.printTaskDetails());
         } else {
             JOptionPane.showMessageDialog(null, "Task with name \"" + taskName + "\" not found.");
         }

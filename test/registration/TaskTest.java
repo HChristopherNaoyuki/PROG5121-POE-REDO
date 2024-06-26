@@ -27,13 +27,13 @@ public class TaskTest {
     @Test
     public void testCreateTaskID() {
         Task test = new Task("Login Feature", "Create Login", "Robyn Harrison", 8);
-        assertEquals("LO:1:ROB", test.createTaskID());
+        assertEquals("LO:1:RH", test.getTaskID());
     }
 
     @Test
     public void testPrintTaskDetails() {
         Task test = new Task("Login Feature", "Create Login", "Robyn Harrison", 8);
-        String expected = "Task Name: Login Feature\nTask Description: Create Login\nDeveloper: Robyn Harrison\nTask Duration: 8 hours\nTask ID: LO:1:ROB";
+        String expected = "Task Name: Login Feature\nTask Description: Create Login\nDeveloper Details: Robyn Harrison\nTask Duration: 8 hours\nTask Status: null\nTask ID: LO:1:RH";
         assertEquals(expected, test.printTaskDetails());
     }
 
