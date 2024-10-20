@@ -1,7 +1,4 @@
 /*
- * Author: Naoyuki Christopher Higaki
- * Student Number: ST10462415
- * 
  * This program is written by Naoyuki Christopher Higaki.
  * Purpose: This class serves as the main entry point 
  * for the registration and login application, including task management features.
