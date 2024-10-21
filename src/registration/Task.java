@@ -1,5 +1,4 @@
 /*
- * This program is written by Naoyuki Christopher Higaki.
  * Purpose: This class represents a task, including task details, status, and functionality to manage tasks.
  */
 
