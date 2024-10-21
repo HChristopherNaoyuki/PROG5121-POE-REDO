@@ -1,5 +1,4 @@
 /*
- * This program is written by Naoyuki Christopher Higaki.
  * Purpose: This class provides functionality for user registration and login, including username and password validation.
  */
 
