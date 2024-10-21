@@ -1,5 +1,4 @@
 /*
- * This program is written by Naoyuki Christopher Higaki.
  * Purpose: This class serves as the main entry point 
  * for the registration and login application, including task management features.
  */
