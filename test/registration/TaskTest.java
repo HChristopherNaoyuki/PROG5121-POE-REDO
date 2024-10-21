@@ -1,5 +1,4 @@
 /*
- * This program is written by Naoyuki Christopher Higaki.
  * Purpose: This class contains unit tests for the Task class to ensure correct functionality.
  */
 
